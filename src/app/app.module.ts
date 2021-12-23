@@ -14,6 +14,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { EvolutionsComponent } from './pages/pokemon/tabs/evolutions/evolutions.component';
 import { GeneralComponent } from './pages/pokemon/tabs/general/general.component';
 import { StatsComponent } from './pages/pokemon/tabs/stats/stats.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { StatsComponent } from './pages/pokemon/tabs/stats/stats.component';
     EvolutionsComponent,
     GeneralComponent,
     StatsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
