@@ -1,16 +1,23 @@
-Pokémon {{ pokemonName }}
+<div class="text-center">
+  <h1>Pokémon {{ pokemonName }}</h1>
+</div>
 
-<button
-  class="btn btn-primary"
-  [disabled]="!previousPokemonName"
-  (click)="goToPreviousPokemon()"
->
-  Previous pokémon
-</button>
-<button
-  class="btn btn-primary"
-  [disabled]="!nextPokemonName"
-  (click)="goToNextPokemon()"
->
-  Next pokémon
-</button>
+
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <div class="container-fluid">
+    <button
+      class="btn btn-primary"
+      [disabled]="!previousPokemonName"
+      (click)="goToPreviousPokemon()"
+    >
+      Previous pokémon
+    </button>
+    <button
+      class="btn btn-primary"
+      [disabled]="!nextPokemonName"
+      (click)="goToNextPokemon()"
+    >
+      Next pokémon
+    </button>
+  </div>
+</nav>
