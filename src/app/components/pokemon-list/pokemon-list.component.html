@@ -2,6 +2,11 @@
 
   <h1 class="display-1">Pokédex</h1>
 
+  <div class="alert alert-danger" *ngIf="error">
+    <h2>Une erreur est survenue !</h2>
+    <p>{{ error }}</p>
+  </div>
+
   <h2 class="display-3">My Pokémons</h2>
   pokémons: {{ pokemons.length }}
 

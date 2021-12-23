@@ -46,6 +46,7 @@ export class PokemonService {
     if (!pokemonId) return;
     this.api.deletePokemon(pokemonId).subscribe(() => {
       this.toastService.show('Pokémon removed', `Pokémon ${name} has been removed`);
+      
     });
   }
 

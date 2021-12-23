@@ -13,6 +13,7 @@ export class PokemonListComponent implements OnInit {
   pokemonName = "";
   currentAddTimeout: any;
   pokemons: Pokemon[] = [];
+  error: string | undefined;
 
   constructor(
     private pokemonService: PokemonService,
@@ -48,6 +49,9 @@ export class PokemonListComponent implements OnInit {
     this.api.fetchPokemons().subscribe((pokemons: Pokemon[]) => {
       this.pokemons = [...pokemons];
       this.pokemonService.pokemons = this.pokemons;
+    }, (error) => {
+      //console.error(error);
+      this.error = error.message; 
     });
   }
 }
