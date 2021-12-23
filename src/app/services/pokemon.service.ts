@@ -18,10 +18,12 @@ export class PokemonService {
     localStorage.setItem('pokemons', JSON.stringify(this.pokemons));
   }
 
-  addPokemon(name: string) {
-    if (!name) return;
+  addPokemon(name: string): boolean {
+    if (!name) return false;
+    if (this.pokemons.includes(name)) return false;
     this.pokemons.push(name);
     this.storePokemonList();
+    return true;
   }
 
   removePokemon(index: number) {

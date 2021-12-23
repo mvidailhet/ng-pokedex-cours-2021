@@ -1,18 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { PokemonService } from 'src/app/services/pokemon.service';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+import { PokemonService } from "src/app/services/pokemon.service";
 
 @Component({
-  selector: 'app-pokemon-list',
-  templateUrl: './pokemon-list.component.html',
-  styleUrls: ['./pokemon-list.component.scss'],
+  selector: "app-pokemon-list",
+  templateUrl: "./pokemon-list.component.html",
+  styleUrls: ["./pokemon-list.component.scss"],
 })
 export class PokemonListComponent implements OnInit {
-  @ViewChild('nameInput') nameInputElementRef: ElementRef | undefined;
+  @ViewChild("nameInput") nameInputElementRef: ElementRef | undefined;
   nbCaught = 0;
   addButtonClicked = false;
   removeButtonClicked = false;
-  pokemonName = '';
+  pokemonName = "";
   currentAddTimeout: any;
   pokemons!: string[];
 
@@ -23,19 +23,19 @@ export class PokemonListComponent implements OnInit {
   ngOnInit(): void {}
 
   generateBackgroundColor() {
-    return this.nbCaught > 5 ? '#6200EE' : '#3700b3';
+    return this.nbCaught > 5 ? "#6200EE" : "#3700b3";
   }
 
   addPokemon() {
-    if (!this.pokemonName) return;
-    this.removeButtonClicked = false;
-    this.nbCaught += 1;
-
     if (this.currentAddTimeout) return;
 
-    this.addButtonClicked = true;
+    const pokemonAdded = this.pokemonService.addPokemon(this.pokemonName);
 
-    this.pokemonService.addPokemon(this.pokemonName);
+    if (!pokemonAdded) return;
+    
+    this.removeButtonClicked = false;
+    this.nbCaught += 1;
+    this.addButtonClicked = true;
 
     this.currentAddTimeout = setTimeout(() => {
       this.addButtonClicked = false;
