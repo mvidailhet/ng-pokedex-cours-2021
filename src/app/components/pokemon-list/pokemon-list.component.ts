@@ -9,7 +9,6 @@ import { PokemonService } from "src/app/services/pokemon.service";
 })
 export class PokemonListComponent implements OnInit {
   @ViewChild("nameInput") nameInputElementRef: ElementRef | undefined;
-  nbCaught = 0;
   addButtonClicked = false;
   removeButtonClicked = false;
   pokemonName = "";
@@ -23,7 +22,7 @@ export class PokemonListComponent implements OnInit {
   ngOnInit(): void {}
 
   generateBackgroundColor() {
-    return this.nbCaught > 5 ? "#6200EE" : "#3700b3";
+    return this.pokemons.length > 5 ? "#6200EE" : "#3700b3";
   }
 
   addPokemon() {
@@ -35,7 +34,6 @@ export class PokemonListComponent implements OnInit {
 
     this.pokemonName = '';
     this.removeButtonClicked = false;
-    this.nbCaught += 1;
     this.addButtonClicked = true;
 
     this.currentAddTimeout = setTimeout(() => {
@@ -47,8 +45,6 @@ export class PokemonListComponent implements OnInit {
   removePokemon(index: number) {
     this.removeButtonClicked = true;
     this.addButtonClicked = false;
-    this.nbCaught -= 1;
-
     this.pokemonService.removePokemon(index);
   }
 }

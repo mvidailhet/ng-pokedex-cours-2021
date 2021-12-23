@@ -3,9 +3,7 @@
   <h1 class="display-1" [ngClass]="{ 'is-white': addButtonClicked, 'is-red': !addButtonClicked }">Pokédex</h1>
 
   <h2 class="display-3">My Pokémons</h2>
-  pokémons: {{ nbCaught }}
-
-  {{ pokemonName }}
+  pokémons: {{ pokemons.length }}
 
   <input #nameInput type="text" [(ngModel)]="pokemonName" />
 
