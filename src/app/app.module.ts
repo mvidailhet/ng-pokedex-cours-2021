@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,10 @@ import { BasicHighlightDirective } from './directives/basic-highlight.directive'
 import { HomeComponent } from './pages/home/home.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { EvolutionsComponent } from './pages/pokemon/tabs/evolutions/evolutions.component';
+import { GeneralComponent } from './pages/pokemon/tabs/general/general.component';
+import { StatsComponent } from './pages/pokemon/tabs/stats/stats.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +26,16 @@ import { ToastComponent } from './components/toast/toast.component';
     HomeComponent,
     PokemonComponent,
     ToastComponent,
+    EvolutionsComponent,
+    GeneralComponent,
+    StatsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModule,
   ],
   providers: [],

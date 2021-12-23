@@ -2,6 +2,14 @@
   <h1>Pokémon {{ pokemonName }}</h1>
 </div>
 
+<nav class="nav nav-tabs">
+  <a class="nav-link" routerLinkActive="active" routerLink="general">General</a>
+  <a class="nav-link" routerLinkActive="active" routerLink="stats">Stats</a>
+  <a class="nav-link" routerLinkActive="active" routerLink="evolutions">Evolutions</a>
+</nav>
+
+<router-outlet></router-outlet>
+
 <nav class="navbar fixed-bottom navbar-light bg-light">
   <div class="container-fluid">
     <button
