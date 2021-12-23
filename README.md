@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
 
+## Getting Started
+
+You need to create a connect.ts file in the root of your project, to export DB_CONNECTION_URL needed for the application to work.
+
+`export const DB_CONNECTION_URL = "Url of your database";`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

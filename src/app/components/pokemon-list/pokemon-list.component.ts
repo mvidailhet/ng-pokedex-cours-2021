@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { PokemonService } from "src/app/services/pokemon.service";
+import { DB_CONNECTION_URL } from "src/connect";
 
 @Component({
   selector: "app-pokemon-list",
@@ -36,7 +37,7 @@ export class PokemonListComponent implements OnInit {
 
   sendPokemonToApi(name: string) {
     this.http.post(
-      "https://ng-pokedex-2021-mitch-default-rtdb.europe-west1.firebasedatabase.app/trucmuchs.json",
+      DB_CONNECTION_URL,
       { name }
     ).subscribe((responseData) => {
       console.log(responseData);
