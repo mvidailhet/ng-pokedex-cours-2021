@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { PokemonService } from "src/app/services/pokemon.service";
@@ -12,7 +13,11 @@ export class PokemonListComponent implements OnInit {
   currentAddTimeout: any;
   pokemons!: string[];
 
-  constructor(private pokemonService: PokemonService, private router: Router) {
+  constructor(
+    private pokemonService: PokemonService,
+    private router: Router,
+    private http: HttpClient
+  ) {
     this.pokemons = this.pokemonService.pokemons;
   }
 
@@ -25,7 +30,17 @@ export class PokemonListComponent implements OnInit {
   addPokemon() {
     const pokemonAdded = this.pokemonService.addPokemon(this.pokemonName);
     if (!pokemonAdded) return;
-    this.pokemonName = '';
+    this.sendPokemonToApi(this.pokemonName);
+    this.pokemonName = "";
+  }
+
+  sendPokemonToApi(name: string) {
+    this.http.post(
+      "https://ng-pokedex-2021-mitch-default-rtdb.europe-west1.firebasedatabase.app/trucmuchs.json",
+      { name }
+    ).subscribe((responseData) => {
+      console.log(responseData);
+    });
   }
 
   removePokemon(index: number) {
