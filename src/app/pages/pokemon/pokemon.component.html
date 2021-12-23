@@ -3,11 +3,12 @@
 </div>
 
 <nav class="nav nav-tabs">
-  <a class="nav-link active" aria-current="page" href="#">General</a>
-  <a class="nav-link" href="#">Stats</a>
-  <a class="nav-link" href="#">Evolutions</a>
+  <a class="nav-link active" aria-current="page" routerLink="./">General</a>
+  <a class="nav-link" routerLink="stats">Stats</a>
+  <a class="nav-link" routerLink="evolutions">Evolutions</a>
 </nav>
 
+<router-outlet></router-outlet>
 
 <nav class="navbar fixed-bottom navbar-light bg-light">
   <div class="container-fluid">
