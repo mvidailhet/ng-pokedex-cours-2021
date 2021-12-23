@@ -19,6 +19,7 @@ export class PokemonService {
   }
 
   addPokemon(name: string) {
+    if (!name) return;
     this.pokemons.push(name);
     this.storePokemonList();
   }

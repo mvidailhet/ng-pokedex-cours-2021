@@ -27,6 +27,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   addPokemon() {
+    if (!this.pokemonName) return;
     this.removeButtonClicked = false;
     this.nbCaught += 1;
 
@@ -37,7 +38,7 @@ export class PokemonListComponent implements OnInit {
     this.pokemonService.addPokemon(this.pokemonName);
 
     this.currentAddTimeout = setTimeout(() => {
-      //this.addButtonClicked = false;
+      this.addButtonClicked = false;
       this.currentAddTimeout = null;
     }, 2000);
   }
