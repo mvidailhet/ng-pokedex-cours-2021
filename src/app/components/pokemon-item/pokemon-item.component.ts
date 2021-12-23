@@ -22,7 +22,6 @@ export class PokemonItemComponent {
 
   remove($event: MouseEvent) {
     $event.stopPropagation();
-    console.log('remove item');
     this.pokemonService.removePokemonByName(this.name);
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class PokemonService {
   pokemons: string[] = [];
 
-  constructor() {
+  constructor(private toastService: ToastService) {
     const storagePokemons = localStorage.getItem('pokemons');
     if (!storagePokemons) return;
     this.pokemons = JSON.parse(storagePokemons);
@@ -22,6 +23,8 @@ export class PokemonService {
     if (!name) return false;
     if (this.pokemons.includes(name)) return false;
     this.pokemons.push(name);
+    this.toastService.show('Pokémon added', `Pokémon ${name} has been added`);
+
     this.storePokemonList();
     return true;
   }
@@ -37,6 +40,8 @@ export class PokemonService {
     }
     const pokemonIndex = this.pokemons.indexOf(name);
     this.removePokemon(pokemonIndex);
+    this.toastService.show('Pokémon removed', `Pokémon ${name} has been removed`);
+
   }
 
   getNextPokemonName(currentPokemonName: string | undefined) {

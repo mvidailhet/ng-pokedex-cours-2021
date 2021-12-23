@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BasicHighlightDirective } from './directives/basic-highlight.directive';
 import { HomeComponent } from './pages/home/home.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PokemonComponent } from './pages/pokemon/pokemon.component';
     BasicHighlightDirective,
     HomeComponent,
     PokemonComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,

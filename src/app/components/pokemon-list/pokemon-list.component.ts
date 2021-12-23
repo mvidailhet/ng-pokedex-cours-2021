@@ -8,9 +8,6 @@ import { PokemonService } from "src/app/services/pokemon.service";
   styleUrls: ["./pokemon-list.component.scss"],
 })
 export class PokemonListComponent implements OnInit {
-  @ViewChild("nameInput") nameInputElementRef: ElementRef | undefined;
-  addButtonClicked = false;
-  removeButtonClicked = false;
   pokemonName = "";
   currentAddTimeout: any;
   pokemons!: string[];
@@ -26,25 +23,12 @@ export class PokemonListComponent implements OnInit {
   }
 
   addPokemon() {
-    if (this.currentAddTimeout) return;
-
     const pokemonAdded = this.pokemonService.addPokemon(this.pokemonName);
-
     if (!pokemonAdded) return;
-
     this.pokemonName = '';
-    this.removeButtonClicked = false;
-    this.addButtonClicked = true;
-
-    this.currentAddTimeout = setTimeout(() => {
-      this.addButtonClicked = false;
-      this.currentAddTimeout = null;
-    }, 2000);
   }
 
   removePokemon(index: number) {
-    this.removeButtonClicked = true;
-    this.addButtonClicked = false;
     this.pokemonService.removePokemon(index);
   }
 }

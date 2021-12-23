@@ -1,14 +1,11 @@
 <div [ngStyle]="{ backgroundColor: generateBackgroundColor() }">
 
-  <h1 class="display-1" [ngClass]="{ 'is-white': addButtonClicked, 'is-red': !addButtonClicked }">Pokédex</h1>
+  <h1 class="display-1">Pokédex</h1>
 
   <h2 class="display-3">My Pokémons</h2>
   pokémons: {{ pokemons.length }}
 
-  <input #nameInput type="text" [(ngModel)]="pokemonName" />
-
-  <div *ngIf="addButtonClicked">pokémon added !</div>
-  <div *ngIf="removeButtonClicked">pokémon removed !</div>
+  <input type="text" [(ngModel)]="pokemonName" />
 
   <div>
     <button class="btn btn-primary" (click)="addPokemon()">add pokémon</button>
