@@ -2,7 +2,6 @@
   <h1>Pokémon {{ pokemonName }}</h1>
 </div>
 
-
 <nav class="navbar fixed-bottom navbar-light bg-light">
   <div class="container-fluid">
     <button
@@ -12,6 +11,13 @@
     >
       Previous pokémon
     </button>
+
+    <button
+      class="btn btn-primary"
+      routerLink=""
+    >Home Menu
+    </button>
+
     <button
       class="btn btn-primary"
       [disabled]="!nextPokemonName"
