@@ -12,9 +12,13 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  sendPokemonToApi(name: string): Observable<any> {
+  postPokemon(name: string): Observable<any> {
     return this.http
       .post(`${this.apiUrl}/pokemons.json`, { name });
+  }
+
+  deletePokemon(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/pokemons/${id}.json`);
   }
 
   fetchPokemons(): Observable<Pokemon[]> {

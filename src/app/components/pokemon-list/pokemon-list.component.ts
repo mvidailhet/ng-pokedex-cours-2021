@@ -1,5 +1,4 @@
-import { HttpClient } from "@angular/common/http";
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ApiService } from "src/app/services/api.service";
 import { Pokemon, PokemonService } from "src/app/services/pokemon.service";
@@ -18,7 +17,6 @@ export class PokemonListComponent implements OnInit {
   constructor(
     private pokemonService: PokemonService,
     private router: Router,
-    private http: HttpClient,
     private api: ApiService,
     private toastService: ToastService,
   ) {
@@ -40,7 +38,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   sendPokemonToApi(name: string) {
-    this.api.sendPokemonToApi(name).subscribe(() => {
+    this.api.postPokemon(name).subscribe(() => {
       this.toastService.show('Pokémon added', `Pokémon ${name} has been added`);
       this.fetchPokemons();
     });
@@ -49,10 +47,7 @@ export class PokemonListComponent implements OnInit {
   fetchPokemons() {
     this.api.fetchPokemons().subscribe((pokemons: Pokemon[]) => {
       this.pokemons = [...pokemons];
+      this.pokemonService.pokemons = this.pokemons;
     });
-  }
-
-  removePokemon(index: number) {
-    this.pokemonService.removePokemon(index);
   }
 }
