@@ -1,32 +1,37 @@
 import { Injectable } from '@angular/core';
 import { ToastService } from './toast.service';
 
+export interface Pokemon {
+  id?: string;
+  name: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
-  pokemons: string[] = [];
+  pokemons: Pokemon[] = [];
 
   constructor(private toastService: ToastService) {
-    const storagePokemons = localStorage.getItem('pokemons');
-    if (!storagePokemons) return;
-    this.pokemons = JSON.parse(storagePokemons);
 
-    this.removePokemon(10);
   }
 
   storePokemonList() {
     localStorage.setItem('pokemons', JSON.stringify(this.pokemons));
   }
 
-  addPokemon(name: string): boolean {
+  canAddPokemon(name: string): boolean {
     if (!name) return false;
-    if (this.pokemons.includes(name)) return false;
-    this.pokemons.push(name);
-    this.toastService.show('Pokémon added', `Pokémon ${name} has been added`);
-
-    this.storePokemonList();
+    if (this.findPokemonByName(name)) return false;
     return true;
+  }
+
+  findPokemonByName(name: string) {
+    return this.pokemons.find(pokemon => pokemon.name === name);
+  }
+
+  findPokemonIndexByName(name: string) {
+    return this.pokemons.findIndex(pokemon => pokemon.name === name);
   }
 
   removePokemon(index: number) {
@@ -38,21 +43,21 @@ export class PokemonService {
     if (!name) {
       throw new Error('Pokemon Name should be set');
     }
-    const pokemonIndex = this.pokemons.indexOf(name);
+    const pokemonIndex = this.findPokemonIndexByName(name);
     this.removePokemon(pokemonIndex);
     this.toastService.show('Pokémon removed', `Pokémon ${name} has been removed`);
 
   }
 
-  getNextPokemonName(currentPokemonName: string | undefined) {
+  getNextPokemonName(currentPokemonName: string | undefined): string {
     if (!currentPokemonName) throw new Error('Can\'t find Pokemon');
-    const pokemonIndex = this.pokemons.indexOf(currentPokemonName);
-    return this.pokemons[pokemonIndex + 1];
+    const pokemonIndex = this.findPokemonIndexByName(currentPokemonName);
+    return this.pokemons[pokemonIndex + 1].name;
   }
 
-  getPreviousPokemonName(currentPokemonName: string | undefined) {
+  getPreviousPokemonName(currentPokemonName: string | undefined): string {
     if (!currentPokemonName) throw new Error('Can\'t find Pokemon');
-    const pokemonIndex = this.pokemons.indexOf(currentPokemonName);
-    return this.pokemons[pokemonIndex - 1];
+    const pokemonIndex = this.findPokemonIndexByName(currentPokemonName);
+    return this.pokemons[pokemonIndex - 1].name;
   }
 }
