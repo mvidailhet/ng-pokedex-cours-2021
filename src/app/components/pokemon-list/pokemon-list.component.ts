@@ -32,7 +32,8 @@ export class PokemonListComponent implements OnInit {
     const pokemonAdded = this.pokemonService.addPokemon(this.pokemonName);
 
     if (!pokemonAdded) return;
-    
+
+    this.pokemonName = '';
     this.removeButtonClicked = false;
     this.nbCaught += 1;
     this.addButtonClicked = true;
