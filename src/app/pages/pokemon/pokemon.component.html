@@ -1,0 +1,16 @@
+Pokémon {{ pokemonName }}
+
+<button
+  class="btn btn-primary"
+  [disabled]="!previousPokemonName"
+  (click)="goToPreviousPokemon()"
+>
+  Previous pokémon
+</button>
+<button
+  class="btn btn-primary"
+  [disabled]="!nextPokemonName"
+  (click)="goToNextPokemon()"
+>
+  Next pokémon
+</button>

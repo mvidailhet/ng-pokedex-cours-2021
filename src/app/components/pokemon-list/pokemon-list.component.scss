@@ -1,0 +1,22 @@
+:host {
+  color: white;
+}
+
+input {
+  display: block;
+}
+
+.is-white {
+  color: white;
+}
+
+.is-red {
+  color: red;
+}
+
+::ng-deep {
+  app-pokemon-item .pokemon-item {
+    color: green;
+  };
+}
+

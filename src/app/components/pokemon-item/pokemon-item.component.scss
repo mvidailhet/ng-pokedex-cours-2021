@@ -1,0 +1,12 @@
+:host {
+  &:hover {
+    transition: background-color 1s;
+  }
+  cursor: pointer;
+  display: block;
+  transition: background-color 1s;
+}
+
+.pokemon-item {
+  color: white;
+}
