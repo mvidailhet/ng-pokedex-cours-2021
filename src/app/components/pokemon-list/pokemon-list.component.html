@@ -1,5 +1,4 @@
 <div [ngStyle]="{ backgroundColor: generateBackgroundColor() }">
-
   <h1 class="display-1">Pokédex</h1>
 
   <div class="alert alert-danger" *ngIf="error">
@@ -16,7 +15,19 @@
     <button class="btn btn-primary" (click)="addPokemon()">add pokémon</button>
   </div>
 
+  <div
+    class="spinner-border text-primary"
+    role="status"
+    *ngIf="isLoading"
+  ></div>
 
-  <app-pokemon-item appBasicHighlight="black" defaultColor="red" [name]="pokemon.name" *ngFor="let pokemon of pokemons">
-  </app-pokemon-item>
+  <ng-container *ngIf="!isLoading">
+    <app-pokemon-item
+      appBasicHighlight="black"
+      defaultColor="red"
+      [name]="pokemon.name"
+      *ngFor="let pokemon of pokemons"
+    >
+    </app-pokemon-item>
+  </ng-container>
 </div>
