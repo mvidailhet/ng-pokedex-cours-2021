@@ -9,11 +9,28 @@
   <h2 class="display-3">My Pokémons</h2>
   pokémons: {{ pokemons.length }}
 
-  <input type="text" [(ngModel)]="pokemonName" />
+  <form>
+    <div class="form-group">
+      <label for="nameInput">Nom</label>
+      <input type="text" name="pokemonName" class="form-control" [(ngModel)]="pokemonName" />
+    </div>
 
-  <div>
-    <button class="btn btn-primary" (click)="addPokemon()">add pokémon</button>
-  </div>
+    <div class="form-group">
+      <label for="typeSelect">Type</label>
+      <select
+        name="pokemonType"
+        class="form-control form-select"
+        id="typeSelect"
+        [(ngModel)]="pokemonType"
+      >
+        <option *ngFor="let pokemonType of pokemonTypeEnum | keyvalue" [value]="pokemonType.key">{{ pokemonType.value }}</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit" (click)="addPokemon()">
+      add pokémon
+    </button>
+  </form>
 
   <div
     class="spinner-border text-primary"
@@ -23,8 +40,7 @@
 
   <ng-container *ngIf="!isLoading">
     <app-pokemon-item
-      appBasicHighlight="black"
-      defaultColor="red"
+      class="pokemon-background-type-{{ pokemon.type }}"
       [name]="pokemon.name"
       *ngFor="let pokemon of pokemons"
     >

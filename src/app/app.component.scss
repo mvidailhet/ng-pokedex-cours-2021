@@ -1,3 +1,16 @@
 h1 {
   font-size: 72px;
 }
+
+$pokemon-type-colors: (
+  GRASS: green,
+  FIRE: orange,
+  WATER: blue,
+  POISON: purple,
+);
+
+@each $name, $hex in $pokemon-type-colors {
+  .pokemon-background-type-#{$name} {
+    background-color: $hex;
+  }
+}

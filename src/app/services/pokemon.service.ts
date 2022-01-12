@@ -2,9 +2,16 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { ToastService } from './toast.service';
 
+export enum PokemonTypeEnum {
+  FIRE = "FIRE",
+  GRASS = "GRASS",
+  WATER = "WATER",
+  POISON = "POISON",
+}
 export interface Pokemon {
   id?: string;
   name: string;
+  type: PokemonTypeEnum;
 }
 
 @Injectable({
@@ -14,11 +21,10 @@ export class PokemonService {
   pokemons: Pokemon[] = [];
 
   constructor(private toastService: ToastService, private api: ApiService) {
-
   }
 
-  canAddPokemon(name: string): boolean {
-    if (!name) return false;
+  canAddPokemon(name: string, type: PokemonTypeEnum | undefined): boolean {
+    if (!name || !type) return false;
     if (this.findPokemonByName(name)) return false;
     return true;
   }
@@ -50,15 +56,17 @@ export class PokemonService {
     });
   }
 
-  getNextPokemonName(currentPokemonName: string | undefined): string {
+  getNextPokemonName(currentPokemonName: string | undefined): string | undefined {
     if (!currentPokemonName) throw new Error('Can\'t find Pokemon');
     const pokemonIndex = this.findPokemonIndexByName(currentPokemonName);
+    if (!this.pokemons[pokemonIndex + 1]) return;
     return this.pokemons[pokemonIndex + 1].name;
   }
 
-  getPreviousPokemonName(currentPokemonName: string | undefined): string {
+  getPreviousPokemonName(currentPokemonName: string | undefined): string | undefined {
     if (!currentPokemonName) throw new Error('Can\'t find Pokemon');
     const pokemonIndex = this.findPokemonIndexByName(currentPokemonName);
+    if (!this.pokemons[pokemonIndex - 1]) return;
     return this.pokemons[pokemonIndex - 1].name;
   }
 }

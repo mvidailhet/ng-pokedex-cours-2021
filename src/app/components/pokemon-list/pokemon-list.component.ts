@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { delay } from "rxjs";
 import { ApiService } from "src/app/services/api.service";
-import { Pokemon, PokemonService } from "src/app/services/pokemon.service";
+import { Pokemon, PokemonService, PokemonTypeEnum } from "src/app/services/pokemon.service";
 import { ToastService } from "src/app/services/toast.service";
 
 @Component({
@@ -12,10 +12,12 @@ import { ToastService } from "src/app/services/toast.service";
 })
 export class PokemonListComponent implements OnInit {
   pokemonName = "";
+  pokemonType?: PokemonTypeEnum;
   currentAddTimeout: any;
   pokemons: Pokemon[] = [];
   error: string | undefined;
   isLoading = true;
+  pokemonTypeEnum = PokemonTypeEnum;
 
   constructor(
     private pokemonService: PokemonService,
@@ -35,13 +37,14 @@ export class PokemonListComponent implements OnInit {
   }
 
   addPokemon() {
-    if (!this.pokemonService.canAddPokemon(this.pokemonName)) return;
-    this.sendPokemonToApi(this.pokemonName);
+    if (!this.pokemonService.canAddPokemon(this.pokemonName, this.pokemonType)) return;
+    if (!this.pokemonType) return;
+    this.sendPokemonToApi(this.pokemonName, this.pokemonType);
     this.pokemonName = "";
   }
 
-  sendPokemonToApi(name: string) {
-    this.api.postPokemon(name).subscribe(() => {
+  sendPokemonToApi(name: string, type: PokemonTypeEnum) {
+    this.api.postPokemon(name, type).subscribe(() => {
       this.toastService.show('Pokémon added', `Pokémon ${name} has been added`);
       this.fetchPokemons();
     });

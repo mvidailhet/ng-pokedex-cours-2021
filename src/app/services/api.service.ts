@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
-import { Pokemon } from "./pokemon.service";
+import { Pokemon, PokemonTypeEnum } from "./pokemon.service";
 
 @Injectable({
   providedIn: "root",
@@ -12,9 +12,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  postPokemon(name: string): Observable<any> {
+  postPokemon(name: string, type: PokemonTypeEnum): Observable<any> {
     return this.http
-      .post(`${this.apiUrl}/pokemons.json`, { name });
+      .post(`${this.apiUrl}/pokemons.json`, { name, type });
   }
 
   deletePokemon(id: string): Observable<any> {
